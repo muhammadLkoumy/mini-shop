@@ -1,3 +1,3 @@
 # Mini Shop
 
-<img src= "screenshots/first.png" width = "400">
+<img src= "screenshots/first.jpg" width = "400">
