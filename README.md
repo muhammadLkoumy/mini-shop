@@ -6,4 +6,4 @@
 
 <img src="screenshots/five.jpg" width = "400"> <img src="screenshots/six.jpg" width = "400">
 
-<img src="screenshots/seven.jpg" width = "400"> <img src="screenshots/eight.jpg" width = "400">
+<img src="screenshots/eight.jpg" width = "400"> <img src="screenshots/seven.jpg" width = "400">
