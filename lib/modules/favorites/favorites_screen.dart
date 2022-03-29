@@ -1,4 +1,5 @@
 import 'package:buildcondition/buildcondition.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
@@ -77,12 +78,12 @@ class FavoritesScreen extends StatelessWidget {
             child: Stack(
               alignment: Alignment.bottomLeft,
               children: [
-                Image(
-                  image: NetworkImage(
-                    '${model.image}',
-                  ),
-                  height: 100,
+                CachedNetworkImage(
                   width: 100,
+                  height: 100,
+                  imageUrl: "${model.image}",
+                  //placeholder: (context, url) => Lottie.asset('assets/animation/ripple.gif'),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
                 if (model.discount != 0)
                   Container(

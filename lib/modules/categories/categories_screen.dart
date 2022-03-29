@@ -1,4 +1,5 @@
 import 'package:buildcondition/buildcondition.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
@@ -49,8 +50,10 @@ class CategoriesScreen extends StatelessWidget {
               border: Border.all(color: Colors.grey.shade300),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Image(
-              image: NetworkImage('${model.image}'),
+            child: CachedNetworkImage(
+              imageUrl: "${model.image}",
+              //placeholder: (context, url) => Lottie.asset('assets/animation/ripple.gif'),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
           ),
           Padding(

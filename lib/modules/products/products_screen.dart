@@ -1,4 +1,5 @@
 import 'package:buildcondition/buildcondition.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
@@ -99,10 +100,13 @@ class ProductsScreen extends StatelessWidget {
       child: CarouselSlider(
         items: model.data!.banners
             .map(
-              (e) => Image(
-                image: NetworkImage('${e.image}'),
-                fit: BoxFit.cover,
+              (banner) => CachedNetworkImage(
                 width: double.infinity,
+                height: 200,
+                fit: BoxFit.cover,
+                imageUrl: "${banner.image}",
+                //placeholder: (context, url) => Lottie.asset('assets/animation/ripple.gif'),
+                errorWidget: (context, url, error) => Icon(Icons.error),
               ),
             )
             .toList(),
@@ -127,17 +131,17 @@ class ProductsScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
       color: Colors.white,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Stack(
             alignment: Alignment.bottomLeft,
             children: [
-              Image(
-                image: NetworkImage(
-                  '${model.image}',
-                ),
-                height: 150,
-                width: 150,
+              CachedNetworkImage(
+                height: 120,
+                width: 120,
+                imageUrl: "${model.image}",
+                //placeholder: (context, url) => Lottie.asset('assets/animation/ripple.gif'),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
               if (model.discount != 0)
                 Container(
@@ -174,7 +178,7 @@ class ProductsScreen extends StatelessWidget {
                 '${model.price}',
                 style: Theme.of(context).textTheme.bodyText1!.copyWith(
                       fontSize: 14,
-                  color: Colors.blue,
+                      color: Colors.blue,
                     ),
               ),
               const SizedBox(
@@ -192,7 +196,9 @@ class ProductsScreen extends StatelessWidget {
               const Spacer(),
               CircleAvatar(
                 radius: 16,
-                backgroundColor: ShopCubit.get(context).favorites[model.id!]! ? Colors.red : Colors.grey.shade400,
+                backgroundColor: ShopCubit.get(context).favorites[model.id!]!
+                    ? Colors.red
+                    : Colors.grey.shade400,
                 child: IconButton(
                     onPressed: () {
                       ShopCubit.get(context).changeFavorites(id: model.id!);
@@ -223,8 +229,10 @@ class ProductsScreen extends StatelessWidget {
             border: Border.all(color: Colors.grey.shade300),
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Image(
-            image: NetworkImage('${model.image}'),
+          child: CachedNetworkImage(
+            imageUrl: "${model.image}",
+            //placeholder: (context, url) => Lottie.asset('assets/animation/ripple.gif'),
+            errorWidget: (context, url, error) => const Icon(Icons.error),
           ),
         ),
         Container(
@@ -232,7 +240,8 @@ class ProductsScreen extends StatelessWidget {
           padding: const EdgeInsets.all(4),
           decoration: BoxDecoration(
             color: Colors.black.withOpacity(.6),
-            borderRadius: const BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
+            borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(8), topRight: Radius.circular(8)),
           ),
           child: Text(
             '${model.name}',
