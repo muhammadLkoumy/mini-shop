@@ -1,4 +1,8 @@
 # Mini Shop
+## State Management Cubit.
+## Save Local Data Shared Preferences.
+
+<text> ----------------------------------------------------------------------------------------------------------------------------- </text>
 
 ### On boarding and settings
 <img src="screenshots/one.jpg" width = "400"> <img src="screenshots/seven.jpg" width = "400">
